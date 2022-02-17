@@ -1,0 +1,172 @@
+.expresspay-payment {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.expresspay-payment select {width: 100%;}
+.expresspay-payment-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.expresspay-payment-header .logo {
+    width: 40%;
+    margin: 10px;
+}
+.expresspay-payment-header .desc {
+    width: 60%;
+    text-align: center;
+    margin: 10px;
+}
+.expresspay-payment .row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+}
+.expresspay-payment .row .label {
+    width: 25%;
+    text-align: right;
+    margin: auto;
+}
+.expresspay-payment .row .label label {
+    font-size: 20px;
+    margin: 15px;
+}
+.expresspay-payment .row .field {
+    width: 75%;
+    margin: 5px;
+}
+.expresspay-payment .row .field input {
+    width: 100%;
+    border-radius: 5px;
+}
+.expresspay-payment .row .expresspay_payment_method {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+}
+.expresspay-payment .row .expresspay_payment_method label {width: 95%;}
+#first_step {display: block;}
+#second_step {display: none;}
+#three_step {display: none;}
+#response_step {display: none;}
+.expresspay-payment .row.back_link i {
+    cursor: pointer;
+    font-style: normal;
+}
+.expresspay-payment .row.back_link i:hover {text-decoration: underline;}
+.expresspay-payment .row label {font-style: normal;}
+.expresspay-payment-email,
+.expresspay-payment-phone {display: none;}
+#three_step .table {
+    border: 1px solid black;
+}
+#three_step .table .val,
+#three_step .table .desc {
+    display: flex;
+    justify-content: center;
+    padding: 0 5px 0 5px;
+    width: 50%;
+}
+#response {
+    display: flex;
+    justify-content: center;
+    padding: 0 5px 0 5px;
+    width: 50%;
+}
+
+/* expresspay DIALOG */
+#expresspay-dialog input[type="radio"]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    height: 40px;
+    width: 40px;
+    transition: all 0.15s ease-out 0s;
+    background: #cbd1d8;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.5rem;
+    outline: none;
+    position: relative;
+    z-index: 1000;
+}
+#expresspay-dialog input[type="radio"]:hover {background: #9faab7;}
+#expresspay-dialog input[type="radio"]:checked {background: #40e0d0;}
+#expresspay-dialog input[type="radio"]:checked::before {
+    width: 40px;
+    height: 40px;
+    display:flex;
+    content: '\f00c';
+    font-size: 25px;
+    font-weight:bold;
+    position: absolute;
+    align-items:center;
+    justify-content:center;
+    font-family:'FontAwesome';
+}
+#expresspay-dialog input[type="radio"]:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    background: #40e0d0;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100;
+}
+#expresspay-dialog input[type="radio"]{border-radius:50%;}
+#expresspay-dialog input[type="radio"]::after{border-radius:50%;}
+@keyframes click-wave {
+    0% {
+        height: 40px;
+        width: 40px;
+        opacity: 0.35;
+        position: relative;
+    }
+    100% {
+        height: 60px;
+        width: 60px;
+        margin-left: -10px;
+        margin-top: -10px;
+        opacity: 0;
+    }
+}
+#expresspay-dialog #expresspay-img {float:left;clear:both;width:100%;margin-bottom:20px;text-align:center;}
+#expresspay-dialog #expresspay-img img {float:none;width:auto;max-width:100%;height:28px;max-height:100%;}
+#expresspay-dialog #expresspay-desc {margin-bottom:0px;font-style:italic;color:#999;border-bottom:1px solid #eee;padding-bottom:12px;text-align:center;}
+#expresspay-dialog #expresspay-price {margin-bottom:5px;font-weight:500;color:#000;font-size:22px;line-height:26px;}
+#expresspay-dialog label {line-height:16px;font-weight:600;width:100%;clear:both;display:inline-block;margin:15px 0 1px 0;color:#333;font-size:12px;}
+#expresspay-dialog input[type="text"] {float:left;width:100%;background:#fff;font-size:13px;color:#333;padding:6px;height:34px;line-height:16px;border:1px solid #ccc;border-radius:3px;}
+#expresspay-dialog p {float:left;clear:both;width:100%;}
+#expresspay-dialog p.bt2 {clear:none;width:60%;padding-right:20px;}
+#expresspay-dialog p.bt2 input[type="text"][size="2"] {width:45%;clear:none;border-top-right-radius:0;border-bottom-right-radius:0;border-right:none;text-align:center;}
+#expresspay-dialog p.bt2 input[type="text"][size="4"] {width:45%;clear:none;border-radius:0;border-left:none;border-top-left-radius:0;border-bottom-left-radius:0;text-align:center;}
+#expresspay-dialog p.bt2 .osp-del {text-align:center;float:left;width:10%;background:#fff;border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#aaa;font-size:14px;line-height:34px;height:34px;}
+#expresspay-dialog p.bt3 {clear:none;width:40%;border-top-left-radius:0;border-bottom-left-radius:0;}
+#expresspay-dialog input[type="submit"] {cursor:pointer;text-shadow:none;border:none;box-shadow:none;border-radius:3px;color: #fff!important;background: #0095f6;font-weight: bold;font-size:13px;line-height:16px;width:100%;padding:12px 8px;text-align:center;float:left;clear:both;margin-top:20px;}
+#expresspay-dialog input[type="submit"]:hover {background:#0398db;}
+#expresspay-dialog .osp-input-box {float:left;width:100%;position:relative;}
+#expresspay-dialog .osp-input-box input[type="text"]:first-child {padding-left:32px;}
+#expresspay-dialog .osp-input-box i {position:absolute;width:28px;height:28px;top:2px;left:2px;text-align:center;color:#333;font-size:14px;line-height:28px;}
+#expresspay-dialog p.bt7 {width:60%;padding-right:20px;}
+#expresspay-dialog p.bt8 {width:40%;clear:none;}
+#expresspay-dialog #expresspay-userdata {margin-bottom:0px;margin-top:30px;font-style:italic;color:#999;border-bottom:1px solid #eee;padding-bottom:10px;text-align:center;}
+#expresspay-results {text-align:center;padding:20px 20px 25px 20px;float:left;width:100%;clear:both;}
+#expresspay-results i {display:inline-block;clear:both;width:100px;text-align:center;line-height:56px;font-size:50px;padding:5px 0;color:#ddd;}
+#expresspay-results span {display:inline-block;clear:both;width:100%;line-height:24px;text-align:center;padding:10px 20px 5px 20px;font-size:16px;color:#333;}
+#expresspay-loading {text-align:center;padding:20px 20px 25px 20px;float:left;width:100%;clear:both;}
+#expresspay-loading i {display:inline-block;clear:both;width:100px;text-align:center;line-height:56px;font-size:50px;padding:5px 0;color:#ddd;}
+#expresspay-loading span {display:inline-block;clear:both;width:100%;line-height:24px;text-align:center;padding:10px 20px 5px 20px;font-size:16px;color:#333;}

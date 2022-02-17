@@ -1,0 +1,367 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ExpressPay Payment Module\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-11 09:54+0000\n"
+"PO-Revision-Date: 2021-02-11 12:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: Русский\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 1.0.0\n"
+"X-Domain: expresspay"
+
+#: classes/expresspay/ExpresspayPayment.php
+msgid "<h3>Account added to the ERIP system for payment</h3><h4>Your order number: ##order_id##</h4>"
+"You need to make a payment in any system that allows you to pay through ERIP (items banking services, ATMs, payment terminals, Internet banking systems, client banking, etc.)."
+"<br/> 1. To do this, in the list of ERIP services go to the section:<br/><b>##erip_path##</b>"
+"<br/> 2. Next, enter the order number <b>##order_id##</b> and click \"Continue\""
+"<br/> 3. Check if the information is correct"
+"<br/> 4. Make a payment."
+msgstr "<h3>Счет добавлен в систему ЕРИП для оплаты</h3><h4>Номер вашего заказа: ##order_id##</h4>"
+"Оплату необходимо произвести в любой системе, позволяющей оплачивать через ERIP (ЕРИП (товары банковские услуги, банкоматы, платежные терминалы, системы интернет-банкинга, клиент-банкинг и др.)."
+"<br/> 1. Для этого в списке услуг ЕРИП перейдите в раздел:<br/><b>##erip_path##</b>"
+"<br/> 2. Далее введите номер заказа <b>##order_id##</b> и нажмите \"Продолжить\""
+"<br/> 3. Проверьте правильность информации"
+"<br/> 4. Произвести платеж."
+
+#: classes/expresspay/ExpresspayPayment.php
+msgid "<h3>Account added to the E-POS system for payment</h3><h4>Your order number: ##epos_code##</h4>"
+"You need to make a payment in any system that allows you to pay through ERIP (banking service points, ATMs, payment terminals, Internet banking systems, client banking, etc.)."
+"<br/> 1. To do this, in the list of ERIP services, go to the section: <b> Settlement System (ERIP)-&gt; E-POS Service-&gt; E-POS - payment for goods and services</b>"
+"<br/> 2. In the Code field, enter <b>##epos_code##</b> and click \"Continue\""
+"<br/> 3. Check the correctness of the information"
+"<br/> 4. Make a payment."
+msgstr "<h3>Счет добавлен в систему E-POS для оплаты</h3><h4>Номер вашего заказа: ##epos_code##</h4>"
+"Оплату необходимо произвести в любой системе, позволяющей производить оплату через ЕРИП (точки обслуживания банков, Банкоматы, платежные терминалы, системы интернет-банкинга, клиент-банкинг и др.)."
+"<br/> 1. Для этого в списке услуг ЕРИП перейдите в раздел: <b> Расчетная система (ЕРИП)-&gt; Услуга E-POS-&gt;E-POS - оплата товаров и услуг</b>"
+"<br/> 2. В поле Код введите <b>##epos_code##</b> и нажмите \"Продолжить\""
+"<br/> 3. Проверить правильность информации"
+"<br/> 4. Произвести платеж."
+
+#: classes/expresspay/ExpresspayPayment.php
+msgid "<h3>Account added to system</h3><h4>Your order number: ##order_id##</h4>"
+"<a href=\"##form_url##\">Go to payment</a>"
+msgstr "<h3>Счет добавлен в систему</h3><h4>Номер вашего заказа: ##order_id##</h4>"
+"<a href=\"##form_url##\">Перейти в оплате</a>"
+
+#: classes/expresspay/ExpresspayPayment.php
+msgid "A form will open to select the payment method via express-pay.by"
+msgstr "Откроется форма для выбора способа оплаты через express-pay.by"
+
+#: classes/expresspay/ExpresspayPayment.php
+msgid "Select"
+msgstr "Выбрать"
+
+#: classes/expresspay/ExpresspayPayment.php
+msgid "Select a payment method"
+msgstr "Выберите способ оплаты"
+
+msgid "Account list is empty"
+msgstr "Список счетов пуст"
+
+msgid "Account number"
+msgstr "Номер счета"
+
+msgid "Active"
+msgstr "Активный"
+
+msgid "Add a payment method"
+msgstr "Добавить метод оплаты"
+
+msgid "Address for notifications"
+msgstr "Адрес для уведомлений"
+
+msgid "Allowed to change address"
+msgstr "Разрешено изменять адрес плательщика"
+
+msgid "Allowed to change amount"
+msgstr "Разрешено изменять сумму оплаты"
+
+msgid "Allowed to change name"
+msgstr "Разрешено изменять ФИО плательщика"
+
+msgid "Amount"
+msgstr "Сумма"
+
+msgid "An error occurred during the billing process"
+msgstr "Произошла ошибка при выставлении счета"
+
+msgid "API address"
+msgstr "Адрес API"
+
+msgid "API key"
+msgstr "API ключ"
+
+msgid "Awaiting payment"
+msgstr "Ожидает оплаты"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Canceled"
+msgstr "Отменен"
+
+msgid "Checkout"
+msgstr "Оформить"
+
+msgid "Date of creation"
+msgstr "Дата создания"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Disable"
+msgstr "Отключить"
+
+msgid "During"
+msgstr "В процессе"
+
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "E-POS"
+msgstr "E-POS"
+
+msgid "E-POS service code"
+msgstr "Код E-POS"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Enable"
+msgstr "Включить"
+
+msgid "Enable digital signature for notifications"
+msgstr "Использовать цифровую подпись для уведомлений"
+
+msgid "Enter amount"
+msgstr "Введите сумму"
+
+msgid "Enter API address"
+msgstr "Введите адрес API"
+
+msgid "Enter API key"
+msgstr "Введите ключ API"
+
+msgid "Enter e-mail"
+msgstr "Введите e-mail"
+
+msgid "Enter E-POS service code"
+msgstr "Введите код E-POS"
+
+msgid "Enter mobile number"
+msgstr "Введите номер мобильного телефона"
+
+msgid "Enter name"
+msgstr "Введите имя"
+
+msgid "Enter Path along the ERIP branch"
+msgstr "Введите путь по ветке ЕРИП"
+
+msgid "Enter purpose of payment"
+msgstr "Введите назначение платежа"
+
+msgid "Enter second name"
+msgstr "Введите отчество"
+
+msgid "Enter secret word"
+msgstr "Введите секретное слово"
+
+msgid "Enter secret word for notifications"
+msgstr "Введите секретное слово для уведомлений"
+
+msgid "Enter service number"
+msgstr "Введите номер услуги"
+
+msgid "Enter service provider code"
+msgstr "Введите код услуги E-POS"
+
+msgid "Enter surname"
+msgstr "Введите фамилию"
+
+msgid "Enter test API address"
+msgstr "Введите адрес тестового API"
+
+msgid "Enter the name of the payment method"
+msgstr "Введите название метода оплаты"
+
+msgid "ERIP"
+msgstr "ЕРИП"
+
+msgid "Expired"
+msgstr "Истек"
+
+msgid "Express Payments"
+msgstr "Экспресс Платежи"
+
+#. Name of the plugin
+msgid "ExpressPay Payment Module"
+msgstr "Экспресс Платежи Платежный модуль"
+
+msgid "Further"
+msgstr "Далее"
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "Home"
+msgstr "Главная"
+
+#. Author URI of the plugin
+msgid "https://express-pay.by"
+msgstr "https://express-pay.by"
+
+#. URI of the plugin
+msgid "https://express-pay.by/cms-extensions/wordpress"
+msgstr "https://express-pay.by/cms-extensions/wordpress"
+
+msgid "Internet-acquiring"
+msgstr "Интернет-эквайринг"
+
+msgid "Invoices and"
+msgstr "Счета и "
+
+msgid "Invoices and payemnts"
+msgstr "Счета и платежи"
+
+#. Author of the plugin
+msgid "LLC «TriIncom»"
+msgstr "ООО «ТриИнком»"
+
+msgid "Mobile number"
+msgstr "Номер мобильного"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "No payment methods found"
+msgstr "Способы оплаты не найдены"
+
+msgid "Options"
+msgstr "Опции"
+
+msgid "Paid in part"
+msgstr "Оплачен частично"
+
+msgid "Paid up"
+msgstr "Оплачен"
+
+msgid "Paid with a bank card"
+msgstr "Оплачен банковской картой"
+
+msgid "Path along the ERIP branch"
+msgstr "Путь по ветке ЕРИП"
+
+msgid "Pay"
+msgstr "Оплатить"
+
+msgid "payemnts"
+msgstr "платежи"
+
+msgid "Payment date"
+msgstr "Дата оплаты"
+
+msgid "Payment method"
+msgstr "Метод оплаты"
+
+msgid "Payment method name"
+msgstr "Название метода оплаты"
+
+msgid "Payment method type"
+msgstr "Тип метода оплаты"
+
+msgid "Payment using the Express payments service"
+msgstr "Оплата с помощью сервиса Экспресс Платежи"
+
+#. Description of the plugin
+msgid ""
+"Place the plugin shortcode at any of your pages and start to accept payments "
+"in Osclass instantly"
+msgstr ""
+"Разместите шорткод плагина на любой из своих страниц чтобы мгновенно начать "
+"принимать платежи в Osclass."
+
+msgid "Purpose of payment"
+msgstr "Назначение платежа"
+
+msgid "Repeat"
+msgstr "Повторить"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Scan the QR code to pay"
+msgstr "Отсканируйте QR-код для оплаты"
+
+msgid "Second name"
+msgstr "Отчество"
+
+msgid "Secret word"
+msgstr "Секретное слово"
+
+msgid "Secret word for notifications"
+msgstr "Секретное слово для уведомлений"
+
+msgid "Select the type of payment method"
+msgstr "Выберите способ оплаты"
+
+msgid "Send email notification to client"
+msgstr "Отправлять клиенту уведомление по электронной почте"
+
+msgid "Send sms notification to the client"
+msgstr "Отправлять SMS-уведомление клиенту"
+
+msgid "Service number"
+msgstr "Номер услуги"
+
+msgid "Service provider code"
+msgstr "Код производителя услуг"
+
+msgid "Service «Express Payments»"
+msgstr "Сервис «Экспресс Платежи»"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Show QR code"
+msgstr "Показывать QR-код"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Surname"
+msgstr "Фамилия"
+
+msgid "Test API address"
+msgstr "Адрес тестового API"
+
+msgid "Test mode"
+msgstr "Тестовый режим"
+
+msgid "The invoice has been successfully paid!"
+msgstr "Счет успешно оплачен!"
+
+msgid "The list of payment methods is empty"
+msgstr "Список способов оплаты пуст"
+
+msgid "To receive, add a payment method"
+msgstr "Для получения добавьте способ оплаты"
+
+msgid "Type of"
+msgstr "Тип"
+
+msgid "Whait second..."
+msgstr "Подождите секунду..."
+
+#: views/admin/admin_footer.php
+msgid "© All rights reserved | LLC «TriIncom»,"
+msgstr "© Все права защищены | ООО «ТриИнком»,"
