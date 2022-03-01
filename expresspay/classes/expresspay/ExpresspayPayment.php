@@ -42,13 +42,12 @@ class ExpresspayPayment {
               </div>
               
               <?php foreach ($listPaymentMethod as $row) : ?>
-                <?php foreach ($listPaymentMethod as $row) : ?>
-                    <?php if ($row['isactive'] == 1): ?>
-                        <label>
-                            <input type="radio" name="paymentmethodid" value="<?php echo osc_esc_html($row['id']); ?>">
-                            <?php echo osc_esc_html($row['name']); ?>
-                        </label>
-                    <?php endif ?>
+                <?php if ($row['isactive'] == 1) : ?>
+                    <label>
+                        <input type="radio" name="paymentmethodid" value="<?php echo osc_esc_html($row['id']); ?>">
+                        <?php echo osc_esc_html($row['name']); ?>
+                    </label>
+                <?php endif ?>
               <?php endforeach; ?>
               <div class="row">
                     <input type="submit" id="expresspay-method-submit-btn" value="<?php _e('Select', 'expresspay') ?>" />
