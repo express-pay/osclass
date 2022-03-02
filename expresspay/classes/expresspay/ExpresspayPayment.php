@@ -274,79 +274,132 @@ class ExpresspayPayment {
      */
     public static function processPayment() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-            $data = (isset($_REQUEST['Data'])) ? $_REQUEST['Data'] : '';
-            $data = stripcslashes($data);
+            $dataJSON = (isset($_REQUEST['Data'])) ? $_REQUEST['Data'] : '';
+            $dataJSON = stripcslashes($dataJSON);
+
+            // Преобразование из json в array
+            $data = array();
+            try {
+                $data = json_decode($dataJSON,true); 
+            } 
+            catch(Exception $e) {
+                header('HTTP/1.1 400 Bad Request');
+                print $st = 'FAILED | failed to decode data';
+                return;
+            }
+
+            // Получение подписи
             $signature = (isset($_REQUEST['Signature'])) ? osc_esc_html($_REQUEST['Signature']) : '';
 
-            $paymentMethod_id = osc_sanitize_int(Params::getParam("method_id"));
-            $paymentMethod = ExpressPayOptionsModel::newInstance()->findByPrimaryKey($paymentMethod_id);
+            if(isset($data['AccountNo'])){
+                $accountNo = $data['AccountNo'];
+                $invoice = ExpressPayInvoiceModel::newInstance()->findByPrimaryKey($accountNo);
+                
+                // Получение настрек для данного метода
+                $paymentMethod = ExpressPayOptionsModel::newInstance()->findByPrimaryKey($invoice['options_id']);
+                $options = json_decode($paymentMethod['options']);
 
-            $options = json_decode($paymentMethod['options']);
-
-            if ($options->UseSignatureForNotification == 1) {
-                $valid_signature = self::computeSignature(array("data" => $data), $options->SecretWordForNotification, 'notification');
-                if ($valid_signature == $signature) {
-                } else {
-                    header('HTTP/1.1 403 FORBIDDEN');
-                    echo 'Access is denied'; 
-                    return;
+                if ($options->UseSignatureForNotification == 1) {
+                    $valid_signature = self::computeSignature(array("data" => $dataJSON), $options->SecretWordForNotification, 'notification');
+                    if ($valid_signature == $signature) {
+                    } else {                    
+                        header('HTTP/1.1 403 FORBIDDEN');
+                        print $st = 'FAILED | Access is denied';
+                        return;
+                    }
                 }
-            }
-            
-            $data = json_decode($data);
-            if (isset($data->CmdType)) {
-                switch ($data->CmdType) {
-                    case '1':
-                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($data->AccountNo, 3);
-                        echo 'OK';
-                    case '2':
-                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($data->AccountNo, 5);
-                        echo 'OK';
-                    case '3':
-                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($data->AccountNo, $data->Status);
-                        $invoice = ExpressPayInvoiceModel::newInstance()->findByPrimaryKey($data->AccountNo);
-                        if($data->Status == 3){
-                            $payment = ModelOSP::newInstance()->getPaymentByCode($invoice['id'], 'EXPRESSPAY');
+                
+                $cmdtype    = $data['CmdType'];
+                $status     = $data['Status'];
+                $amount     = $data['Amount'];
 
-                            if (!$payment) {
-                                $extra = osp_get_custom($invoice['extra']);
-                                $product_type = explode('x', $invoice['itemnumber']);
-                                $amount = $data->Amount;
-                                
-                                // SAVE TRANSACTION LOG
-                                $payment_id = ModelOSP::newInstance()->saveLog(
-                                    $invoice['itemnumber'], //concept
-                                    $data->InvoiceNo, // transaction code
-                                    $amount, //amount
-                                    933, //currency
-                                    $extra['email'], // payer's email
-                                    $extra['user'], //user
-                                    osp_create_cart_string($product_type[1], $extra['user'], $extra['itemid']), // cart string
-                                    $product_type[0], //product type
-                                    'EXPRESSPAY' //source
-                                ); 
+                if (isset($data['Created'])) {
+                    ExpressPayInvoiceModel::newInstance()->updateInvoiceDateOfPayment($accountNo, $data['Created']);
+                }
+                switch ($cmdtype) {
+                    case 1:
+                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 1);
+                        header("HTTP/1.1 200 OK");
+                        print $st= 'OK | the notice is processed';
+                        return;
+                    case 2:
+                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 5);
+                        header("HTTP/1.1 200 OK");
+                        print $st= 'OK | the notice is processed';
+                        return;
+                    case 3:
+                        if(isset($status)){
+                            switch($status){
+                                case 1: // Ожидает оплату
+                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 1);
+                                    break;
+                                case 2: // Просрочен
+                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 2);
+                                    break;
+                                case 3: // Оплачен
+                                case 6: // Оплачен с помощью банковской карты
+                                    if($status == 3){
+                                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 3);
+                                    }
+                                    else if($status == 6){
+                                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 6);
+                                    }
+                                    $payment = ModelOSP::newInstance()->getPaymentByCode($invoice['id'], 'EXPRESSPAY');
 
-                                // Pay it!
-                                $payment_details = osp_prepare_payment_data($amount, $payment_id, $extra['user'], $product_type);   //amount, payment_id, user_id, product_type
-                                $pay_item = osp_pay_fee($payment_details);
+                                    if (!$payment) {
+                                        $extra = osp_get_custom($invoice['extra']);
+                                        $product_type = explode('x', $invoice['itemnumber']);
+                                        
+                                        // SAVE TRANSACTION LOG
+                                        $payment_id = ModelOSP::newInstance()->saveLog(
+                                            $invoice['itemnumber'], //concept
+                                            $accountNo, // transaction code
+                                            $amount, //amount
+                                            933, //currency
+                                            $extra['email'], // payer's email
+                                            $extra['user'], //user
+                                            osp_create_cart_string($product_type[1], $extra['user'], $extra['itemid']), // cart string
+                                            $product_type[0], //product type
+                                            'EXPRESSPAY' //source
+                                        ); 
+        
+                                        // Pay it!
+                                        $payment_details = osp_prepare_payment_data($amount, $payment_id, $extra['user'], $product_type);   //amount, payment_id, user_id, product_type
+                                        $pay_item = osp_pay_fee($payment_details);
+                                    }
+                                    break;
+                                case 4: // Оплачен частично 
+                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 4);
+                                    break;
+                                case 5: // Отменен
+                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 5);
+                                    break;
+                                case 7: // Платеж возращен
+                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 5);
+                                    break;
+                                default:
+                                    header('HTTP/1.1 400 Bad Request');
+                                    print $st = 'FAILED | invalid status'; //Ошибка в параметрах
+                                    $logs->log_error('processNotification','FAILED | Invalid status; Status - '.$status);
+                                    return;
                             }
-                            echo 'Payment has already been made!';
+                            header("HTTP/1.1 200 OK");
+                            print $st= 'OK | the notice is processed';
+                            return;
                         }
                         break;
                     default:
                         header('HTTP/1.1 400 Bad Request');
-                        echo 'CmdType unknown'; 
+                        print $st = 'FAILED | invalid cmdtype';
                         return;
                 }
-            }
-
-            if (isset($data->Created)) {
-                ExpressPayInvoiceModel::newInstance()->updateInvoiceDateOfPayment($data->AccountNo, $data->Created);
+                header('HTTP/1.1 400 Bad Request');
+                print $st = 'FAILED | the notice is not processed';
             }
         }
-        else {
-            header('HTTP/1.1 403 FORBIDDEN');
-            echo 'Access is denied';
+        else {		
+            header('HTTP/1.1 405 Method Not Allowed');
+            print $st = 'FAILED | request method not supported';
             return;
         }
     }

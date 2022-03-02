@@ -258,8 +258,11 @@ msgstr "Оплачен"
 msgid "Paid with a bank card"
 msgstr "Оплачен банковской картой"
 
+msgid "Payment returned"
+msgstr "Оплачен банковской картой"
+
 msgid "Path along the ERIP branch"
-msgstr "Путь по ветке ЕРИП"
+msgstr "Платеж возращен"
 
 msgid "Pay"
 msgstr "Оплатить"

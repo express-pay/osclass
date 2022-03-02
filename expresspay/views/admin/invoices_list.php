@@ -42,6 +42,9 @@
                         case 6:
                             _e('Paid with a bank card', 'expresspay');
                             break;
+                        case 7:
+                            _e('Payment returned', 'expresspay');
+                            break;
                     }
                     ?>
                 </p></div>
