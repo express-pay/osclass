@@ -20,5 +20,7 @@ if(osp_param('expresspay_enabled') == 1) {
    	ExpresspayPayment::dialogJS();
 }
 ```
-## Адрес для URL уведомлений
+## Адрес для обработки URL уведомлений от сервиса «Экспресс Платежи»
+```
 http://{адрес_сайта}/index.php?page=ajax&action=runhook&hook=expresspay_processPayment&method_id={id_способа_оплаты}
+```
