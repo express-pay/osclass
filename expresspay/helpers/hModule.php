@@ -58,12 +58,10 @@ function expresspay_plugin() {
  * 
  * Адрес для обработки URL уведомлений от сервиса «Экспресс Платежи»
  * 
- * @param string $method_id id_способа_оплаты
- * 
  */
-function expresspay_url_notifications($method_id = 0)
+function expresspay_url_notifications()
 {
-    return osc_base_url().'index.php?page=ajax&action=runhook&hook=expresspay_processPayment&method_id='.$method_id;
+    return osc_base_url().'index.php?page=ajax&action=runhook&hook=expresspay_processPayment';
 }
 
 /**

@@ -10,6 +10,7 @@
 .header .logo {display: block;}
 .header .title {
     flex: 1;
+    font-weight: bold;
     text-align:center;
 }
 
@@ -124,6 +125,7 @@
 .table-list .header-table{
     background-color: #cbd1d8;
     text-align: center;
+    font-weight: bold;
     display: table;
     width: 100%;
 }

@@ -175,7 +175,7 @@ class ExpresspayPayment {
         {
             $options = json_decode($paymentMethod['options']);
 
-            $amount = osc_esc_js(Params::getParam("amount"));
+            $amount = str_replace('.',',', osc_esc_js(Params::getParam("amount")));
             $description = osc_esc_js(Params::getParam("description"));
             $extra = osc_esc_js(Params::getParam("extra"));
             $itemnumber = osc_esc_js(Params::getParam("itemnumber"));
@@ -200,7 +200,6 @@ class ExpresspayPayment {
             $accountNo = ExpressPayInvoiceModel::newInstance()->insertInvoice($amount, $description, $extra, $itemnumber, $paymentMethod_id);
 
             $signatureParams = array(
-                "Token" => $options->Token,
                 "ServiceId" => $options->ServiceId,
                 "AccountNo" => $accountNo,
                 "Amount" => $amount,
@@ -215,19 +214,14 @@ class ExpresspayPayment {
             if ($paymentMethod['type'] == 'card') 
             {
                 $signatureParams['Signature'] = self::computeSignature($signatureParams, $options->SecretWord, 'add-webcard-invoice');
-                unset($signatureParams['Token']);
 
                 $result = self::sendRequestPOST($baseurl."web_cardinvoices", $signatureParams);
 
                 if(isset($result->ExpressPayInvoiceNo))
                 {
-                    $invoiceNo = $result->ExpressPayInvoiceNo;
                     $formUrl = $result->FormUrl;
+                    header("HTTP/1.1 200 OK");
                     echo self::getCardMessage($options, $accountNo, $formUrl);
-                }
-                else{
-                    header('HTTP/1.1 502 Bad Gateway');
-                    echo 'Bad Gateway';
                     return;
                 }
             }
@@ -239,32 +233,32 @@ class ExpresspayPayment {
                 $signatureParams["IsNameEditable"] = $options->CanChangeName;
                 $signatureParams["IsAddressEditable"] = $options->CanChangeAddress;
                 $signatureParams["IsAmountEditable"] = $options->CanChangeAmount;
-                $signatureParams["EmailNotification"] = $email;
-                $signatureParams["SmsPhone"] = $client_phone;
+                if($options->SendEmail) $signatureParams["EmailNotification"] = $email;
+                if($options->SendSms) $signatureParams["SmsPhone"] = $client_phone;
                 $signatureParams['Signature'] = self::computeSignature($signatureParams, $options->SecretWord, 'add-web-invoice');
-                unset($signatureParams['Token']);
 
                 $result = self::sendRequestPOST($baseurl."web_invoices", $signatureParams);
+
                 if(isset($result->ExpressPayInvoiceNo))
                 {
-                    $invoiceNo = $result->ExpressPayInvoiceNo;
-                    $formUrl = $result->FormUrl;
                     if ($paymentMethod['type'] == 'erip')
                     {
+                        header("HTTP/1.1 200 OK");
                         echo self::getEripMessage($options, $accountNo, $invoiceUrl);
+                        return;
                     }
                     else
                     {
+                        header("HTTP/1.1 200 OK");
                         echo self::getEposMessage($options, $accountNo, $invoiceUrl);
+                        return;
                     }
-                }
-                else{
-                    header('HTTP/1.1 502 Bad Gateway');
-                    echo 'Bad Gateway';
-                    return;
                 }
             }
         }
+        header('HTTP/1.1 405 Method Not Allowed');
+        print $st = 'При выполнении запроса произошла непредвиденная ошибка. Пожалуйста, повторите запрос позже или обратитесь в службу технической поддержки магазина.';
+        return;
     }
 
     /**
@@ -375,7 +369,7 @@ class ExpresspayPayment {
                                     ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 5);
                                     break;
                                 case 7: // Платеж возращен
-                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 5);
+                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 7);
                                     break;
                                 default:
                                     header('HTTP/1.1 400 Bad Request');

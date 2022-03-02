@@ -18,8 +18,8 @@ jQuery(document).ready(function () {
                 error: function (error) {
                     jQuery("#expresspay-loading").hide(0);
                     jQuery('#expresspay-method-form').css('display', 'block');
-                    jQuery("#expresspay-results").html(error.responseJSON).show(350);
-                    console.error('expresspay_createInvoices error: ', error.responseJSON);
+                    jQuery("#expresspay-results").html('<p style="color:#D1001D;">'+error.responseText+'</p>').show(350);
+                    console.error('expresspay_createInvoices error: ', error.responseText);
                 }
             });
         });

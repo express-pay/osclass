@@ -49,14 +49,12 @@
         <input type="text" id="payment_setting_service_id" name="payment_setting_service_id" required placeholder="<?php _e('Enter service number', 'expresspay') ?>" value="<?php echo osc_esc_html(isset($param['ServiceId']) ? $param['ServiceId'] : ''); ?>" />
     </div>
 
-    <?php if (expresspay_get_options_id() > 0) : ?>
     <div class="input-field">
         <label for="payment_setting_notification_url">
             <?php _e('Address for notifications', 'expresspay') ?>
         </label>
-        <input type="text" id="payment_setting_notification_url" value="<?php echo osc_esc_html(expresspay_url_notifications(expresspay_get_options_id())); ?>" readonly />
+        <input type="text" id="payment_setting_notification_url" value="<?php echo osc_esc_html(expresspay_url_notifications()); ?>" readonly />
     </div>
-    <?php endif ?>
     <div class="input-field">
         <label for="payment_setting_secret_word">
             <?php _e('Secret word', 'expresspay') ?>
