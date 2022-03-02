@@ -112,7 +112,7 @@ class ExpresspayPayment {
         "<br/> 1. To do this, in the list of ERIP services go to the section:<br/><b>##erip_path##</b>".
         "<br/> 2. Next, enter the order number <b>##order_id##</b> and click \"Continue\"".
         "<br/> 3. Check if the information is correct".
-        "<br/> 4. Make a payment.", "expresspay");
+        "<br/> 4. Make a payment", "expresspay");
 
         $message_success_erip = str_replace("##order_id##", $account_no, $message_success_erip);
         $message_success_erip = str_replace("##erip_path##", $options->EripPath, $message_success_erip);
@@ -130,12 +130,13 @@ class ExpresspayPayment {
      */
     static function getEposMessage($options, $account_no)
     {
+        $epos_code = $options->ServiceEposCode.'-'.$options->ServiceProviderCode.'-'.$account_no;
         $message_success_epos = __("<h3>Account added to the E-POS system for payment</h3><h4>Your order number: ##epos_code##</h4>".
         "You need to make a payment in any system that allows you to pay through ERIP (banking service points, ATMs, payment terminals, Internet banking systems, client banking, etc.).".
         "<br/> 1. To do this, in the list of ERIP services, go to the section: <b> Settlement System (ERIP)-&gt; E-POS Service-&gt; E-POS - payment for goods and services</b>".
         "<br/> 2. In the Code field, enter <b>##epos_code##</b> and click \"Continue\"".
         "<br/> 3. Check the correctness of the information".
-        "<br/> 4. Make a payment.", "expresspay");
+        "<br/> 4. Make a payment", "expresspay");
         $message_success_epos = str_replace("##epos_code##", $epos_code, $message_success_epos);
 
         return $message_success_epos;

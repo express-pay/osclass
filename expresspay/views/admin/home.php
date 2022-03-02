@@ -7,12 +7,16 @@
 <div class="home-page">
     <div class="wrap-menu">
         <ul>
-            <li class="menu_2"><a href="<?php echo osc_esc_html(osc_route_admin_url('expresspay-admin-invoices-list')); ?>">
+            <li class="menu_2">
+                <a href="<?php echo osc_esc_html(osc_route_admin_url('expresspay-admin-invoices-list')); ?>">
                     <div class="text"><?php _e('Invoices and', 'expresspay') ?> <br /> <?php _e('payemnts', 'expresspay') ?></div>
-                </a></li>
-            <li class="menu_3"><a href="<?php echo osc_esc_html(osc_route_admin_url('expresspay-admin-options-list')); ?>">
+                </a>
+            </li>
+            <li class="menu_3">
+                <a href="<?php echo osc_esc_html(osc_route_admin_url('expresspay-admin-options-list')); ?>">
                     <div class="text"> <?php _e('Options', 'expresspay') ?> </div>
-                </a></li>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

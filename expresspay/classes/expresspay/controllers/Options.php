@@ -7,7 +7,6 @@ class ExpressPayOptionsController extends AdminSecBaseModel
     function __construct()
     {
         $this->optionsModel = ExpressPayOptionsModel::newInstance();
-
     }
     public function doOptionsList()
     {
@@ -133,11 +132,21 @@ class ExpressPayOptionsController extends AdminSecBaseModel
         $this->redirectTo(osc_route_admin_url('expresspay-admin-options-list'));
     }
     
-    public function doDeleteOptions(){
+    public function optionEdit(){
+        $method = osc_esc_js(Params::getParam("method"));
         $id = osc_sanitize_int(Params::getParam("id"));
+
         if($id != 0){
-            $this->optionsModel->deleteByPrimaryKey($id);
-            $this->redirectTo(osc_route_admin_url('expresspay-admin-options-list'));
+            $optionsModel = ExpressPayOptionsModel::newInstance();
+            if($method == 'payment_off'){
+                $optionsModel->updateByPrimaryKey(array('isactive'=>0), $id);
+            }
+            else if($method == 'payment_on'){
+                $optionsModel->updateByPrimaryKey(array('isactive'=>1), $id);
+            }
+            else if($method == 'payment_delete'){
+                $optionsModel->deleteByPrimaryKey($id);
+            }
         }
     }
 }

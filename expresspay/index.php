@@ -2,7 +2,7 @@
 /*
 Plugin Name: ExpressPay Payment Module
 Short Name: expresspay_module
-Plugin URI: https://express-pay.by/cms-extensions/
+Plugin URI: https://express-pay.by/extensions/osclass/
 Description: Place the plugin shortcode at any of your pages and start to accept payments in Osclass instantly
 Version: 1.0.0
 Author: LLC «TriIncom»
@@ -149,10 +149,6 @@ function expresspay_admin_controller()
             $do = new ExpressPayOptionsController();
             $do->doSaveOptions();
             break;
-        case "expresspay-admin-options-delete":    
-            $do = new ExpressPayOptionsController();
-            $do->doDeleteOptions();
-            break;
     }
 }
 osc_add_hook("renderplugin_controller", "expresspay_admin_controller");
@@ -164,6 +160,8 @@ osc_add_hook("renderplugin_controller", "expresspay_admin_controller");
  */
 osc_add_hook('ajax_expresspay_createInvoices', array('ExpresspayPayment', 'createInvoices'));
 osc_add_hook('ajax_expresspay_processPayment', array('ExpresspayPayment', 'processPayment'));
+
+osc_add_hook('ajax_expresspay_optionEdit', array('ExpressPayOptionsController', 'optionEdit'));
 
 /*
  * ==========================================================================
@@ -206,12 +204,6 @@ osc_add_route(
     'expresspay-admin-options-save', 
     'expresspay/admin/options/save/',
     'expresspay/admin/options/save/',
-    expresspay_name().'/views/admin/options_list.php'
-);
-osc_add_route(
-    'expresspay-admin-options-delete', 
-    'expresspay/admin/options/delete/',
-    'expresspay/admin/options/delete/',
     expresspay_name().'/views/admin/options_list.php'
 );
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Получение названия плагина.
  */
@@ -52,6 +53,19 @@ function expresspay_view($name, array $args = array())
 function expresspay_plugin() {
     return 'expresspay';
 }
+
+/**
+ * 
+ * Адрес для обработки URL уведомлений от сервиса «Экспресс Платежи»
+ * 
+ * @param string $method_id id_способа_оплаты
+ * 
+ */
+function expresspay_url_notifications($method_id = 0)
+{
+    return osc_base_url().'index.php?page=ajax&action=runhook&hook=expresspay_processPayment&method_id='.$method_id;
+}
+
 /**
  * 
  * Проверка маршрута

@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
                     jQuery("#expresspay-loading").hide(0);
                     jQuery('#expresspay-method-form').css('display', 'block');
                     jQuery("#expresspay-results").html(error.responseJSON).show(350);
-                    console.log('expresspay_createInvoices error: ', error.responseJSON);
+                    console.error('expresspay_createInvoices error: ', error.responseJSON);
                 }
             });
         });
