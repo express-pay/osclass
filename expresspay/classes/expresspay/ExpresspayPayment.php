@@ -11,88 +11,82 @@ class ExpresspayPayment {
     }
     
     public static function dialogJS() { 
-      $listPaymentMethod = ExpressPayOptionsModel::newInstance()->listAll();
-      ?>
-        <div id="expresspay-dialog" title="Express-pay.by" style="display:none;">
-        
-            <div id="expresspay-loading"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><span><?php echo osc_esc_js(__('Whait second...', 'expresspay'));?></span></div>
-          <div id="expresspay-info">
-            <div id="expresspay-data">
-              <p id="expresspay-desc"></p>
-              <label><?php _e('Payment amount', 'osclass_pay'); ?></label>
-              <p id="expresspay-price"></p>
-            </div>
-            <div id="loading_message" style="display:none;">
-                <div class="stage-loading" style="text-align:center">
+        $listPaymentMethod = ExpressPayOptionsModel::newInstance()->listAll();?>
+
+        <div id="expresspay-overlay" class="osp-custom-overlay"></div>
+        <div id="expresspay-dialog" class="osp-custom-dialog" style="display:none;">
+            <div class="osp-inside">
+                <div class="osp-top">
+                    <span>Express-pay.by</span>
+                    <div class="osp-close"><i class="fa fa-times"></i></div>
+                </div>
+
+                <div class="osp-body">
+                    <div id="expresspay-info">
+                        <div id="expresspay-data">
+                            <p id="expresspay-desc"></p>
+                            <label><?php _e('Payment amount', 'osclass_pay'); ?></label>
+                            <p id="expresspay-price"></p>
+                        </div>
+                    </div>
+                    <div id="expresspay-loading">
+                        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+                        <span><?php echo osc_esc_js(__('Whait second...', 'expresspay'));?></span>
+                    </div>
+                    <form id="expresspay-method-form" method="POST" class="nocsrf" action="<?php echo osc_base_url(true); ?>" >
+                        <input type="hidden" name="page" value="ajax" />
+                        <input type="hidden" name="action" value="runhook" />
+                        <input type="hidden" name="hook" value="expresspay_createInvoices" />
+
+                        <input type="hidden" name="amount" id="expresspay-amount" value="" />
+                        <input type="hidden" name="description" id="expresspay-description" value=""/>
+                        <input type="hidden" name="itemnumber" id="expresspay-itemnumber" value="" />
+                        <input type="hidden" name="extra" id="expresspay-extra" value=""/>
+                        <label><?php _e('Select a payment method', 'expresspay') ?></label>
+
+                        <?php foreach ($listPaymentMethod as $row) : ?>
+                            <?php if ($row['isactive'] == 1) : ?>
+                                <div class="row">
+                                    <input type="radio" name="paymentmethodid" value="<?php echo osc_esc_html($row['id']); ?>"/>
+                                    <?php echo osc_esc_html($row['name']); ?>
+                                </div>
+                            <?php endif ?>
+                        <?php endforeach; ?>
+                        <input type="submit" id="expresspay-method-submit-btn" value="<?php _e('Select', 'expresspay') ?>" />
+                    </form>
+                    <div id="payment_message"></div>
+                </div>
+                <div id="expresspay-results">
                     <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
-                    <p><?php echo osc_esc_js(__('Whait second...', 'expresspay')) ?></p>
+                    <span><?php echo osc_esc_js(__('Processing the payment, please wait...', 'osclass_pay'));?></span>
                 </div>
+                <div id="expresspay-response"></div>
             </div>
-            <form id="expresspay-method-form" method="POST" class="nocsrf" action="<?php echo osc_base_url(true); ?>" >
-              <input type="hidden" name="page" value="ajax" />
-              <input type="hidden" name="action" value="runhook" />
-              <input type="hidden" name="hook" value="expresspay_createInvoices" />
-
-              <input type="hidden" name="amount" id="expresspay-amount" value="" />
-              <input type="hidden" name="description" id="expresspay-description" value=""/>
-              <input type="hidden" name="itemnumber" id="expresspay-itemnumber" value="" />
-              <input type="hidden" name="extra" id="expresspay-extra" value=""/>
-              <div class="row">
-                <p><?php _e('Select a payment method', 'expresspay') ?></p>
-              </div>
-              
-              <?php foreach ($listPaymentMethod as $row) : ?>
-                <?php if ($row['isactive'] == 1) : ?>
-                    <label>
-                        <input type="radio" name="paymentmethodid" value="<?php echo osc_esc_html($row['id']); ?>">
-                        <?php echo osc_esc_html($row['name']); ?>
-                    </label>
-                <?php endif ?>
-              <?php endforeach; ?>
-              <div class="row">
-                    <input type="submit" id="expresspay-method-submit-btn" value="<?php _e('Select', 'expresspay') ?>" />
-                </div>
-            </form>
-            <div id="payment_message" class="row" style="display:none;"></div>
-          </div>
-
-          <div id="expresspay-results"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><span><?php echo osc_esc_js(__('Processing the payment, please wait...', 'osclass_pay'));?></span></div>
-          <div id="expresspay-response"></div>
         </div>
-        
+        <link rel="stylesheet" href="<?php echo expresspay_assets_url('css/font-awesome.min.css');?>">
         <script type="text/javascript" src="<?php echo expresspay_assets_url('js/shortcode.js');?>"></script>
         <script type="text/javascript">
-          $(document).ready(function(){
-            $("#expresspay-dialog").dialog({
-              autoOpen: false,
-              dialogClass: "osp-dialog expresspay-dialog",
-              modal: true,
-              show: { effect: 'fade', duration: 200 },
-              hide: { effect: 'fade', duration: 200 },
-              open: function(event, ui) {
-              }
+            $('#expresspay-dialog .osp-close, #expresspay-overlay').on('click', function(e){ 
+                e.stopPropagation();
+                $('.osp-custom-dialog').fadeOut(200);
+                $('.osp-custom-overlay').fadeOut(200);
             });
-          });
+            function expresspay_pay(amount, description, itemnumber, extra) {
+                $("#expresspay-desc").html(description);
+                $("#expresspay-price").html(amount+" <?php echo osp_currency(); ?>");
 
-          function expresspay_pay(amount, description, itemnumber, extra) {
-            jQuery("#expresspay-desc").html(description);
-            jQuery("#expresspay-price").html(amount+" <?php echo osp_currency(); ?>");
+                $('#expresspay-amount').val(amount);
+                $('#expresspay-description').val(description);
+                $('#expresspay-itemnumber').val(itemnumber);
+                $('#expresspay-extra').val(extra);
 
-            jQuery('#expresspay-amount').val(amount);
-            jQuery('#expresspay-description').val(description);
-            jQuery('#expresspay-itemnumber').val(itemnumber);
-            jQuery('#expresspay-extra').val(extra);
-
-
-            jQuery("#expresspay-submit").prop('disabled', false).removeClass('osp-disabled');
-            jQuery("#expresspay-submit > span").text(amount + ' <?php echo osp_currency(); ?>');
-
-            jQuery("#expresspay-loading").hide(0);
-            jQuery("#expresspay-results").html('').hide(0);
-            jQuery("#expresspay-info").show();
-            jQuery("#expresspay-dialog").dialog('open');
-          }
-
+                $("#expresspay-loading").hide(0);
+                $("#expresspay-info").show();
+                
+                $('#expresspay-dialog').fadeIn(200).fadeIn(200).css('top', ($(document).scrollTop() + Math.round($(window).height()/10)) + 'px');;
+                $('#expresspay-overlay').fadeIn(200);
+                $("#expresspay-results").html('').hide(0);
+            }
         </script>
       <?php
     }
