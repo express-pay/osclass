@@ -48,6 +48,7 @@
     width: 35%;
     vertical-align: middle;
     margin: 0px 10px!important;
+    float: none!important;
 }
 
 .input-field input[type="text"]{

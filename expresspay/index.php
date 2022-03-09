@@ -3,7 +3,7 @@
 Plugin Name: ExpressPay Payment Module
 Short Name: expresspay
 Plugin URI: https://express-pay.by/extensions/osclass/
-Description: CMS Osclass extension for evaluation with Express Payments service. Expansion of permissions to accept payments using ERIP, bank cards and E-POS.
+Description: CMS Osclass extension for integration with the Express Payments service. The extension allows you to accept payments using ERIP, bank cards and E-POS.
 Version: 1.0.0
 Author: LLC «TriIncom»
 Author URI: https://express-pay.by

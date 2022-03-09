@@ -286,10 +286,8 @@ msgid "Payment using the Express payments service"
 msgstr "Оплата с помощью сервиса Экспресс Платежи"
 
 #. Description of the plugin
-msgid ""
-"CMS Osclass extension for evaluation with Express Payments service. Expansion of permissions to accept payments using ERIP, bank cards and E-POS."
-msgstr ""
-"Расширение CMS Osclass для оценки с сервисом «Экспресс Платежи». Расширение разрешений на прием платежей с помощью ЕРИП, банковских карт и E-POS."
+msgid "CMS Osclass extension for integration with the Express Payments service. The extension allows you to accept payments using ERIP, bank cards and E-POS."
+msgstr "Расширение CMS Osclass для интеграции с сервисом «Экспресс Платежи». Расширение позволяет производить прием платежей с помощью ЕРИП, банковских карт и E-POS."
 
 msgid "Purpose of payment"
 msgstr "Назначение платежа"
