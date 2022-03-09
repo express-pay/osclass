@@ -61,7 +61,6 @@
     width: 90%!important;
     margin: 0px 10px!important;
 }
-
 .input-field input[type="checkbox"]{
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -79,7 +78,6 @@
     display: inline-block;
     margin: 0px 10px!important;
     outline: none;
-    position: relative;
     z-index: 1000;
 }
 .input-field input[type="checkbox"]:hover {background: #9faab7;}
@@ -95,6 +93,7 @@
     align-items:center;
     justify-content:center;
     font-family:'FontAwesome';
+    margin: auto;
 }
 .input-field input[type="checkbox"]:checked::after {
     -webkit-animation: click-wave 0.65s;
@@ -177,21 +176,24 @@
 .button-right {
     color: #ffffff !important;
     font-family: 'OpenSansBold' !important;
-    padding: 14px 31px;
+    padding: 14px 31px!important;
     display: inline-block;
     font-size: 16px !important;
     text-align: center;
-    background-color: #ff9000;
+    background-color: #ff9000!important;
+    border: 1px solid #ffb14b!important;
     cursor: pointer;
-    border: 1px solid #ffb14b;
     transition: background-color 0.6s;
     float: none;
     outline: none;
     margin-top: 8px;
+    height: auto!important;
+    line-height: 18px!important;
+    border-radius: 0px!important;
 }
 .button-left {
-    background-color: #44a9d5;
-    border: 1px solid #98d0e8;
+    background-color: #44a9d5!important;
+    border: 1px solid #98d0e8!important;
 }
 .button-right:hover,
 .button-right:focus,

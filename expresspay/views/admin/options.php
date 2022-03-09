@@ -157,7 +157,7 @@
     </div>
     <div class="button-field">
         <input class="button-left button-action" type="submit" value="<?php _e('Save', 'expresspay') ?>">
-        <input class="button-right button-action" type="button" onclick="window.location.href='<?php echo osc_esc_html($url . '?page=payment-settings-list'); ?>'" value="<?php _e('Cancel', 'expresspay') ?>">
+        <input class="button-right button-action" type="button" onclick="window.location.href='<?php echo osc_esc_html('?page=plugins&action=renderplugin&route=expresspay-admin-options-list'); ?>'" value="<?php _e('Cancel', 'expresspay') ?>">
     </div>
 </form>
 <?php include __DIR__  . '\admin_footer.php';?>

@@ -160,7 +160,7 @@ osc_add_hook("renderplugin_controller", "expresspay_admin_controller");
 osc_add_hook('ajax_expresspay_createInvoices', array('ExpresspayPayment', 'createInvoices'));
 osc_add_hook('ajax_expresspay_processPayment', array('ExpresspayPayment', 'processPayment'));
 
-osc_add_hook('ajax_expresspay_optionEdit', array('ExpressPayOptionsController', 'optionEdit'));
+osc_add_hook('ajax_admin_expresspay_optionEdit', array('ExpressPayOptionsController', 'optionEdit'));
 
 /*
  * ==========================================================================

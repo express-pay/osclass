@@ -54,7 +54,7 @@ function paymentMethodOptions(ajaxurl, method, id) {
             data: {
                 page:'ajax',
                 action: 'runhook',
-                hook: 'expresspay_optionEdit',
+                hook: 'admin_expresspay_optionEdit',
                 method: method,
                 id: id,
             },
