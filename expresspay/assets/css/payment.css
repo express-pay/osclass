@@ -1,7 +1,14 @@
+#expresspay-overlay{
+    position: fixed;
+}
 /* expresspay DIALOG */
 #expresspay-dialog {
     height: auto!important;
     width: 400px!important;
+    position: fixed;
+    margin:auto;
+    left:0;
+    right:0
 }
 #expresspay-dialog .row {
     display: flex;

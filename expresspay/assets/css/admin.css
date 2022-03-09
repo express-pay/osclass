@@ -13,7 +13,6 @@
     font-weight: bold;
     text-align:center;
 }
-
 .header-menu{
   display: table;
   width: 100%;
@@ -288,3 +287,8 @@ a.icon.icon_stop{background-position:0px -210px;}
 a.icon.icon_delete{background-position:3px -16px;}
 i.icon.icon_add{background-position:-1px -158px;}
 a.icon.icon_on{background-position:-1px -111px;}
+
+.ico-expresspay {
+    background: url(../img/logo_mini.png) no-repeat center center !important;
+    background-size: 100%!important;
+}

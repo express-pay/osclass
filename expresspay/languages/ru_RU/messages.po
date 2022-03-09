@@ -287,11 +287,9 @@ msgstr "Оплата с помощью сервиса Экспресс Плат�
 
 #. Description of the plugin
 msgid ""
-"Place the plugin shortcode at any of your pages and start to accept payments "
-"in Osclass instantly"
+"CMS Osclass extension for evaluation with Express Payments service. Expansion of permissions to accept payments using ERIP, bank cards and E-POS."
 msgstr ""
-"Разместите шорткод плагина на любой из своих страниц чтобы мгновенно начать "
-"принимать платежи в Osclass."
+"Расширение CMS Osclass для оценки с сервисом «Экспресс Платежи». Расширение разрешений на прием платежей с помощью ЕРИП, банковских карт и E-POS."
 
 msgid "Purpose of payment"
 msgstr "Назначение платежа"

@@ -1,16 +1,16 @@
 <?php
 /*
 Plugin Name: ExpressPay Payment Module
-Short Name: expresspay_module
+Short Name: expresspay
 Plugin URI: https://express-pay.by/extensions/osclass/
-Description: Place the plugin shortcode at any of your pages and start to accept payments in Osclass instantly
+Description: CMS Osclass extension for evaluation with Express Payments service. Expansion of permissions to accept payments using ERIP, bank cards and E-POS.
 Version: 1.0.0
 Author: LLC «TriIncom»
 Author URI: https://express-pay.by
 Text Domain: osclass_expresspay
 Domain Path: /languages
 */
-defined('ABS_PATH') or die('Access denied');
+if (defined('ABSPATH')) exit;
 require_once __DIR__ . "/oc-load.php";
 
 /*
@@ -21,7 +21,7 @@ require_once __DIR__ . "/oc-load.php";
 function expresspay_install() {
     expresspay_module_import_sql(__DIR__ . "/assets/model/install.sql");
     osc_set_preference('expresspay_enabled', '1', 'plugin-osclass_pay', 'BOOLEAN');
-    osc_set_preference("version", "1.0.0", "plugin_expresspay_module");
+    osc_set_preference("version", "1.0.0", "plugin_expresspay");
     osc_reset_preferences();
 
 }
@@ -35,7 +35,7 @@ osc_register_plugin(osc_plugin_path(__FILE__), 'expresspay_install');
 function expresspay_uninstall() {
     expresspay_module_import_sql(__DIR__ . "/assets/model/uninstall.sql");
     osc_delete_preference("expresspay_enabled", "plugin-osclass_pay");
-    osc_delete_preference("version", "plugin_expresspay_module");
+    osc_delete_preference("version", "plugin_expresspay");
     osc_reset_preferences();
 }
 osc_add_hook(osc_plugin_path(__FILE__) . '_uninstall', 'expresspay_uninstall');
@@ -50,8 +50,7 @@ function expresspay_menu() {
         __('Express Pay', 'expresspay'), 
         osc_route_admin_url('expresspay-admin-home'),
         'expresspay',
-        'administrator',
-        $icon_url = expresspay_assets_url('img/logo_mini.png')
+        'administrator'
     );
     osc_add_admin_submenu_page(
         'expresspay', 
@@ -93,13 +92,13 @@ osc_add_hook(osc_plugin_path(__FILE__)."_configure", 'expresspay_admin') ;
  * ==========================================================================
  */
 function expresspay_load_lib() {
-	osc_enqueue_style('expresspay-payment-style', expresspay_assets_url('css/payment.css'));
+	osc_enqueue_style('expresspay-payment-style', expresspay_assets_url('css/payment.css?v='.osp_param('version')));
 }
 osc_add_hook('init', 'expresspay_load_lib');
 
 function expresspay_admin_load_lib() {
-	osc_enqueue_style('expresspay-admin-style', expresspay_assets_url('css/admin.css'));
-    osc_register_script('expresspay-admin-script', expresspay_assets_url('js/admin.js'));
+	osc_enqueue_style('expresspay-admin-style', expresspay_assets_url('css/admin.css?v='.osp_param('version')));
+    osc_register_script('expresspay-admin-script', expresspay_assets_url('js/admin.js?v='.osp_param('version')));
     osc_enqueue_script('expresspay-admin-script');
 }
 osc_add_hook('init_admin', 'expresspay_admin_load_lib');

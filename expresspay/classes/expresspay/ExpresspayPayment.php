@@ -64,7 +64,7 @@ class ExpresspayPayment {
             </div>
         </div>
         <link rel="stylesheet" href="<?php echo expresspay_assets_url('css/font-awesome.min.css');?>">
-        <script type="text/javascript" src="<?php echo expresspay_assets_url('js/shortcode.js');?>"></script>
+        <script type="text/javascript" src="<?php echo expresspay_assets_url('js/shortcode.js?v='.osp_param('version'));?>"></script>
         <script type="text/javascript">
             $('#expresspay-dialog .osp-close, #expresspay-overlay').on('click', function(e){ 
                 e.stopPropagation();
@@ -83,7 +83,7 @@ class ExpresspayPayment {
                 $("#expresspay-loading").hide(0);
                 $("#expresspay-info").show();
                 
-                $('#expresspay-dialog').fadeIn(200).fadeIn(200).css('top', ($(document).scrollTop() + Math.round($(window).height()/10)) + 'px');;
+                $('#expresspay-dialog').fadeIn(200).fadeIn(200);
                 $('#expresspay-overlay').fadeIn(200);
                 $("#expresspay-results").html('').hide(0);
             }
@@ -194,6 +194,7 @@ class ExpresspayPayment {
             $accountNo = ExpressPayInvoiceModel::newInstance()->insertInvoice($amount, $description, $extra, $itemnumber, $paymentMethod_id);
 
             $signatureParams = array(
+                "Token" => $options->Token,
                 "ServiceId" => $options->ServiceId,
                 "AccountNo" => $accountNo,
                 "Amount" => $amount,
@@ -208,6 +209,7 @@ class ExpresspayPayment {
             if ($paymentMethod['type'] == 'card') 
             {
                 $signatureParams['Signature'] = self::computeSignature($signatureParams, $options->SecretWord, 'add-webcard-invoice');
+                unset($signatureParams['Token']);
 
                 $result = self::sendRequestPOST($baseurl."web_cardinvoices", $signatureParams);
 
@@ -229,7 +231,9 @@ class ExpresspayPayment {
                 $signatureParams["IsAmountEditable"] = $options->CanChangeAmount;
                 if($options->SendEmail) $signatureParams["EmailNotification"] = $email;
                 if($options->SendSms) $signatureParams["SmsPhone"] = $client_phone;
+                
                 $signatureParams['Signature'] = self::computeSignature($signatureParams, $options->SecretWord, 'add-web-invoice');
+                unset($signatureParams['Token']);
 
                 $result = self::sendRequestPOST($baseurl."web_invoices", $signatureParams);
 
