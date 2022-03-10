@@ -42,6 +42,26 @@ osc_add_hook(osc_plugin_path(__FILE__) . '_uninstall', 'expresspay_uninstall');
 
 /*
  * ==========================================================================
+ *  ENABLE
+ * ==========================================================================
+ */
+function expresspay_enable() {
+    osc_set_preference('expresspay_enabled', '1', 'plugin-osclass_pay', 'BOOLEAN');
+}
+osc_add_hook(osc_plugin_path(__FILE__) . '_enable', 'expresspay_enable');
+
+/*
+ * ==========================================================================
+ *  DISABLE
+ * ==========================================================================
+ */
+function expresspay_disable() {
+    osc_set_preference('expresspay_enabled', '0', 'plugin-osclass_pay', 'BOOLEAN');
+}
+osc_add_hook(osc_plugin_path(__FILE__) . '_disable', 'expresspay_disable');
+
+/*
+ * ==========================================================================
  *  Administrator Menus
  * ==========================================================================
  */
