@@ -7,7 +7,7 @@
 * Osclass v3.3.1 и выше;
 * Osclass Pay Plugin v1.8.4 и выше.
 
-## Добавление кнопки оплаты
+## Добавление кнопки оплаты в плагин Osclass Pay Plugin v3.4.4 и ниже
 Для отображении кнопки оплаты необходимо изменить файл \oc-content\plugins\osclass_pay\functions.php добавив в конец функции osp_buttons следующие строчки:<br>
 ```php
 if(class_exists('ExpresspayPayment') && osp_param('expresspay_enabled') == 1) {
