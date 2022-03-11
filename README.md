@@ -10,13 +10,13 @@
 ## Добавление кнопки оплаты
 Для отображении кнопки оплаты необходимо изменить файл \oc-content\plugins\osclass_pay\functions.php добавив в конец функции osp_buttons следующие строчки:<br>
 ```php
-if(osp_param('expresspay_enabled') == 1) {
+if(class_exists('ExpresspayPayment') && osp_param('expresspay_enabled') == 1) {
 	ExpresspayPayment::button($amount, $description, $itemnumber, $extra_array);
 }
 ```
 в конец функции osp_buttons_js следующие строчки:<br>
 ```php
-if(osp_param('expresspay_enabled') == 1) {
+if(class_exists('ExpresspayPayment') && osp_param('expresspay_enabled') == 1) {
    	ExpresspayPayment::dialogJS();
 }
 ```
