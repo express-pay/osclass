@@ -168,10 +168,11 @@ class ExpresspayPayment {
         if($paymentMethod['isactive'] == 1)
         {
             $options = json_decode($paymentMethod['options']);
-
-            $amount = str_replace('.',',', osc_esc_js(Params::getParam("amount")));
+            $amount = Params::getParam("amount");
             $description = osc_esc_js(Params::getParam("description"));
             $extra = osc_esc_js(Params::getParam("extra"));
+            $extra .= '|concept,'.$description;
+            $extra .= '|product,'.$itemnumber;
             $itemnumber = osc_esc_js(Params::getParam("itemnumber"));
 
             $extra_array = osp_get_custom($extra);
@@ -344,7 +345,7 @@ class ExpresspayPayment {
                                         
                                         // SAVE TRANSACTION LOG
                                         $payment_id = ModelOSP::newInstance()->saveLog(
-                                            $invoice['itemnumber'], //concept
+                                            $extra['concept'], //concept
                                             $accountNo, // transaction code
                                             $amount, //amount
                                             933, //currency

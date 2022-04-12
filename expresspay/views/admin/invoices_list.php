@@ -20,7 +20,7 @@
                 <div class="cell-2 cell-center"><p><?php echo osc_esc_html($row['datecreated']); ?></p></div>
                 <div class="cell-2 cell-center"><p>
                     <?php
-                    switch ($row->status) {
+                    switch ($row['status']) {
                         case 0:
                             _e('During', 'expresspay');
                             break;
