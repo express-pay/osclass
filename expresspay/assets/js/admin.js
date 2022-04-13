@@ -31,16 +31,19 @@ jQuery(document).ready(function () {
             jQuery('#erip_setting').show(400);
             jQuery('#erip_setting_path').hide(400);
             jQuery('#epos_setting').show(400);
+            jQuery('#card_setting').hide(400);
         }
         else if (selected_value == 'erip'){
             jQuery('#erip_setting').show(400);
             jQuery('#erip_setting_path').show(400);
             jQuery('#epos_setting').hide(400);
+            jQuery('#card_setting').hide(400);
         }
         else{
             jQuery('#erip_setting').hide(400);
             jQuery('#erip_setting_path').hide(400);
             jQuery('#epos_setting').hide(400);
+            jQuery('#card_setting').show(400);
         }
         changeTestMode();
     }

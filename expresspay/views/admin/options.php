@@ -142,6 +142,22 @@
         <hr />
     </div>
 
+    <div id="card_setting">
+        <div class="input-field">
+            <label for="payment_setting_success_url">
+                <?php _e('Address of successful payment', 'expresspay') ?>
+            </label>
+            <input type="text" id="payment_setting_success_url" name="payment_setting_success_url" required placeholder="<?php _e('Enter address of successful payment', 'expresspay') ?>" value="<?php echo osc_esc_html(isset($param['SuccessUrl']) ? $param['SuccessUrl'] : ''); ?>" />
+        </div>
+        <div class="input-field">
+            <label for="payment_setting_fail_url">
+                <?php _e('Address of fail payment', 'expresspay') ?>
+            </label>
+            <input type="text" id="payment_setting_fail_url" name="payment_setting_fail_url" required placeholder="<?php _e('Enter address of fail payment', 'expresspay') ?>" value="<?php echo osc_esc_html(isset($param['FailUrl']) ? $param['FailUrl'] : ''); ?>" />
+        </div>
+        <hr />
+    </div>
+
     <div class="input-field">
         <label for="payment_setting_api_url">
             <?php _e('API address', 'expresspay') ?>

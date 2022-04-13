@@ -92,6 +92,12 @@ msgstr "Сумма"
 msgid "An error occurred during the billing process"
 msgstr "Произошла ошибка при выставлении счета"
 
+msgid "Address of successful payment"
+msgstr "Адрес успешной оплаты"
+
+msgid "Address of fail payment"
+msgstr "Адрес неуспешной оплаты"
+
 msgid "API address"
 msgstr "Адрес API"
 
@@ -188,6 +194,12 @@ msgstr "Введите код услуги E-POS"
 msgid "Enter surname"
 msgstr "Введите фамилию"
 
+msgid "Enter address of successful payment"
+msgstr "Введите адрес успешной оплаты"
+
+msgid "Enter address of fail payment"
+msgstr "Введите адрес адрес неуспешной оплаты"
+
 msgid "Enter test API address"
 msgstr "Введите адрес тестового API"
 
@@ -219,10 +231,6 @@ msgstr "Главная"
 #. Author URI of the plugin
 msgid "https://express-pay.by"
 msgstr "https://express-pay.by"
-
-#. URI of the plugin
-msgid "https://express-pay.by/cms-extensions/wordpress"
-msgstr "https://express-pay.by/cms-extensions/wordpress"
 
 msgid "Internet-acquiring"
 msgstr "Интернет-эквайринг"

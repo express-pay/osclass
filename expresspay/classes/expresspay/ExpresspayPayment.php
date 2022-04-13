@@ -194,6 +194,8 @@ class ExpresspayPayment {
 
             $accountNo = ExpressPayInvoiceModel::newInstance()->insertInvoice($amount, $description, $extra, $itemnumber, $paymentMethod_id);
 
+            $successUrl = isset($options->SuccessUrl) ? $options->SuccessUrl : osc_base_url(true);
+            $failUrl = isset($options->FailUrl) ? $options->FailUrl : osc_base_url(true);
             $signatureParams = array(
                 "Token" => $options->Token,
                 "ServiceId" => $options->ServiceId,
@@ -202,8 +204,8 @@ class ExpresspayPayment {
                 "Currency" => 933,
                 "Info" => $description,
                 "ReturnType" => "json",
-                "ReturnUrl" => osc_base_url(true),
-                "FailUrl" => osc_base_url(true),
+                "ReturnUrl" => $successUrl,
+                "FailUrl" => $failUrl,
             );
             
             $baseurl = $options->TestMode == 1 ? $options->SandboxUrl : $options->ApiUrl;

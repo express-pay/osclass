@@ -30,6 +30,8 @@ class ExpressPayOptionsController extends AdminSecBaseModel
 
         if($id == 0){
             $param = array(
+                'SuccessUrl' => osc_base_url(),
+                'FailUrl' => osc_base_url(),
                 'ApiUrl' => 'https://api.express-pay.by/v1/',
                 'SandboxUrl' => 'https://sandbox-api.express-pay.by/v1/',
             );
@@ -62,8 +64,7 @@ class ExpressPayOptionsController extends AdminSecBaseModel
             'SecretWord' => osc_esc_js($_REQUEST['payment_setting_secret_word']),
             'SecretWordForNotification' => osc_esc_js($_REQUEST['payment_setting_secret_word_for_notification']),
             'ApiUrl' => osc_esc_js($_REQUEST['payment_setting_api_url']),
-            'SandboxUrl' => osc_esc_js($_REQUEST['payment_setting_sandbox_url']),
-            'EripPath' => osc_esc_js($_REQUEST['payment_setting_erip_path']),
+            'SandboxUrl' => osc_esc_js($_REQUEST['payment_setting_sandbox_url'])
         );
 
         
@@ -93,8 +94,17 @@ class ExpressPayOptionsController extends AdminSecBaseModel
                 if (isset($_REQUEST['payment_setting_send_sms_notification']))
                     $params['SendSms'] = osc_esc_js($_REQUEST['payment_setting_send_sms_notification']) ? 1 : 0;
 
+                if (isset($_REQUEST['payment_setting_erip_path']))
+                    $params['EripPath'] = osc_esc_js($_REQUEST['payment_setting_erip_path']);
+                    
                 break;
             case 'card':
+                if (isset($_REQUEST['payment_setting_success_url']))
+                    $params['SuccessUrl'] = osc_esc_js($_REQUEST['payment_setting_success_url']);
+
+                if (isset($_REQUEST['payment_setting_fail_url']))
+                    $params['FailUrl'] = osc_esc_js($_REQUEST['payment_setting_fail_url']);
+
                 break;
             case 'epos':
                 if (isset($_REQUEST['payment_setting_show_qr_code']))
