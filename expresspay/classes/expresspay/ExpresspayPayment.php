@@ -313,7 +313,9 @@ class ExpresspayPayment {
                 }
                 switch ($cmdtype) {
                     case 1:
-                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 1);
+                        if($invoice['status'] == 0){
+                            ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 1);
+                        }
                         header("HTTP/1.1 200 OK");
                         print $st= 'OK | the notice is processed';
                         return;
@@ -326,7 +328,9 @@ class ExpresspayPayment {
                         if(isset($status)){
                             switch($status){
                                 case 1: // Ожидает оплату
-                                    ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 1);
+                                    if($invoice['status'] == 0){
+                                        ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 1);
+                                    }
                                     break;
                                 case 2: // Просрочен
                                     ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 2);
