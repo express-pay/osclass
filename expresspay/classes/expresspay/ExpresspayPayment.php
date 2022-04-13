@@ -306,7 +306,7 @@ class ExpresspayPayment {
                 
                 $cmdtype    = $data['CmdType'];
                 $status     = $data['Status'];
-                $amount     = $data['Amount'];
+                $amount     = str_replace(',', '.', $data['Amount']);
 
                 if (isset($data['Created'])) {
                     ExpressPayInvoiceModel::newInstance()->updateInvoiceDateOfPayment($accountNo, $data['Created']);
