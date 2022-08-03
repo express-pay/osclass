@@ -1,7 +1,8 @@
 # Расширение Osclass сервиса «Экспресс Платежи»
 Расширение CMS Osclass для интеграции с сервисом «Экспресс Платежи». Расширение позволяет производить прием платежей с помощью ЕРИП, банковских карт и E-POS.
 
-<a href="https://downgit.github.io/#/home?url=https://github.com/express-pay/osclass/tree/main/expresspay">Скачать ZIP</a>
+<a href="https://downgit.github.io/#/home?url=https://github.com/express-pay/osclass/tree/main/expresspay">Скачать ZIP</a><br/>
+<a href="https://www.youtube.com/c/express-pay-by">Наш Youtube канал с опубликованными видео по расширениям</a>
 ## Минимальные требования для установки плагина:
 
 * Osclass v3.3.1 и выше;
