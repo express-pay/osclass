@@ -313,9 +313,6 @@ class ExpresspayPayment {
                 }
                 switch ($cmdtype) {
                     case 1:
-                        if($invoice['status'] == 0){
-                            ExpressPayInvoiceModel::newInstance()->updateInvoiceStatus($accountNo, 1);
-                        }
                         header("HTTP/1.1 200 OK");
                         print $st= 'OK | the notice is processed';
                         return;
