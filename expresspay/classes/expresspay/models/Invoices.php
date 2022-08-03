@@ -53,7 +53,7 @@ class ExpressPayInvoiceModel extends DAO
     
     public function insertInvoice($amount, $description, $extra, $itemnumber, $optionsid)
     {
-        $sql = sprintf("INSERT INTO %s (amount, description, extra, itemnumber, status, options_id, datecreated) VALUES (%01.2f, '%s', '%s', '%s', 0, %d, CURRENT_TIMESTAMP());", $this->getTableName(), $amount,  $description, $extra, $itemnumber, $optionsid);
+        $sql = sprintf("INSERT INTO %s (amount, description, extra, itemnumber, status, options_id, datecreated) VALUES (%01.2f, '%s', '%s', '%s', 1, %d, CURRENT_TIMESTAMP());", $this->getTableName(), $amount,  $description, $extra, $itemnumber, $optionsid);
         
         $result = $this->dao->query($sql);
 
